@@ -3,10 +3,8 @@ import "./styles.css";
 
 const COLORS = ["red", "blue", "green", "orange", "purple"];
 const DIAMETER = 50;
-const getRandomColor = (min, max) => {
-  min = Math.floor(min);
-  max = Math.ceil(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomColor = () => {
+  return Math.floor(Math.random() * COLORS.length) + 1;
 };
 
 const Circle = ({ clientX, clientY, color }) => {
@@ -37,7 +35,7 @@ export default function App() {
       const rect = canvasRef.current.getBoundingClientRect();
       const _clientX = clientX - rect.left;
       const _clientY = clientY - rect.top;
-      const colorIndex = getRandomColor(1, COLORS.length);
+      const colorIndex = getRandomColor();
       const color = COLORS[colorIndex - 1];
 
       setCircles((prev) => {
