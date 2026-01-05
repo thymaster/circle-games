@@ -46,24 +46,23 @@ export default function App() {
       });
     }
   };
+  
   const undo = () => {
     const lastCircle = circles.pop();
     setStacks((prev) => [...prev, lastCircle]);
     setCircles([...circles]);
   };
+
   const redo = () => {
     const lastCircle = stacks.pop();
     setCircles((prev) => [...prev, lastCircle]);
     setStacks([...stacks]);
   };
+
   const reset = () => {
     setCircles([]);
     setStacks([]);
   };
-
-  const isResetDisabled = circles.length === 0 && stacks.length === 0;
-  const isUndoDisabled = circles.length === 0;
-  const isRedoDisabled = stacks.length === 0;
 
   return (
     <div className="App">
@@ -73,13 +72,13 @@ export default function App() {
         ))}
       </div>
       <div className="action-area">
-        <button disabled={isUndoDisabled} onClick={undo}>
+        <button disabled={circles.length === 0} onClick={undo}>
           Undo
         </button>
-        <button disabled={isRedoDisabled} onClick={redo}>
+        <button disabled={stacks.length === 0} onClick={redo}>
           Redo
         </button>
-        <button disabled={isResetDisabled} onClick={reset}>
+        <button disabled={circles.length === 0 && stacks.length === 0} onClick={reset}>
           Reset
         </button>
       </div>
